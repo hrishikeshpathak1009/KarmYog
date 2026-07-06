@@ -1,10 +1,25 @@
 import SummaryCard from "../../components/dashboard/SummaryCard";
 import HabitCard from "../../components/dashboard/HabitCard";
 
+import { useQuery } from "@tanstack/react-query";
+import { getDashboard } from "../../services/dashboard.service";
+
 export default function DashboardPage() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: getDashboard,
+  });
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1>Failed to load dashboard</h1>;
+  }
+
   return (
     <div className="space-y-8">
-
       <div>
         <h1 className="text-4xl font-bold">
           Good Morning 👋
@@ -16,40 +31,41 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-4 gap-6">
+        <SummaryCard
+          title="Today's Progress"
+          value={`${data.summary.todayProgress}%`}
+        />
 
-        <SummaryCard title="Today's Progress" value="72%" />
-        <SummaryCard title="Current Streak" value="14" />
-        <SummaryCard title="Completed Today" value="6 / 8" />
-        <SummaryCard title="Weekly Progress" value="82%" />
+        <SummaryCard
+          title="Current Streak"
+          value={data.summary.currentStreak}
+        />
 
+        <SummaryCard
+          title="Completed Today"
+          value={`${data.summary.completedToday}/${data.summary.totalHabits}`}
+        />
+
+        <SummaryCard
+          title="Weekly Progress"
+          value={`${data.summary.weeklyCompletion}%`}
+        />
       </div>
 
       <div className="space-y-4">
-
         <h2 className="text-2xl font-bold">
           Today's Habits
         </h2>
 
-        <HabitCard
-          title="Workout"
-          completedValue={45}
-          targetValue={60}
-        />
-
-        <HabitCard
-          title="Drink Water"
-          completedValue={2400}
-          targetValue={3000}
-        />
-
-        <HabitCard
-          title="Reading"
-          completedValue={18}
-          targetValue={20}
-        />
-
+        {data.todayHabits.map((habit: any) => (
+          <HabitCard
+            key={habit.id}
+            title={habit.title}
+            completedValue={habit.completedValue}
+            targetValue={habit.targetValue}
+          />
+        ))}
       </div>
-
     </div>
   );
 }

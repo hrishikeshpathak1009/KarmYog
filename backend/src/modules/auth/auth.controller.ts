@@ -38,6 +38,7 @@ export const loginController = async (
   req: Request,
   res: Response
 ) => {
+  console.log(req.body);
   try {
     const data = loginSchema.parse(req.body);
 
