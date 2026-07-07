@@ -3,13 +3,17 @@ import {
   integer,
   pgTable,
   text,
+  pgEnum,
   timestamp,
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 
 import { users } from "./user.js";
-
+export const habitTypeEnum = pgEnum("habit_type", [
+  "progress",
+  "completion",
+]);
 export const habits = pgTable("habits", {
   id: uuid("id").defaultRandom().primaryKey(),
 
@@ -21,6 +25,9 @@ export const habits = pgTable("habits", {
 
   title: varchar("title", { length: 100 }).notNull(),
 
+  type: habitTypeEnum("type")
+  .default("progress")
+  .notNull(),
   description: text("description"),
 
   icon: varchar("icon", { length: 50 }),

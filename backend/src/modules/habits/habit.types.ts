@@ -1,12 +1,16 @@
-export interface CreateHabitInput {
-  title: string;
-  description?: string;
-  icon?: string;
-  color?: string;
-  frequency?: string;
-  targetValue?: number;
-  unit?: string;
-}
+import { z } from "zod";
+import {
+  createHabitSchema,
+  updateHabitSchema,
+} from "./habit.validator.js";
 
-export interface UpdateHabitInput
-  extends Partial<CreateHabitInput> {}
+export type CreateHabitInput = z.infer<
+  typeof createHabitSchema
+>;
+
+export type UpdateHabitInput = z.infer<
+  typeof updateHabitSchema
+>;
+
+export type HabitType =
+  CreateHabitInput["type"];

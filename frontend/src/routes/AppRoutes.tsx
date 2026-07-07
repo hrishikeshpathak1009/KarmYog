@@ -6,7 +6,7 @@ import RegisterPage from "../pages/auth/RegisterPage";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardPage from "../pages/dashboard/DashboardPage";
-
+import KarmPage from "../pages/karm/KarmPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 function Placeholder({ title }: { title: string }) {
@@ -27,9 +27,9 @@ export default function AppRoutes() {
           <Route path="/dashboard" element={<DashboardPage />} />
 
           <Route
-            path="/habits"
-            element={<Placeholder title="Habits" />}
-          />
+    path="/habits"
+    element={<KarmPage />}
+/>
 
           <Route
             path="/analytics"

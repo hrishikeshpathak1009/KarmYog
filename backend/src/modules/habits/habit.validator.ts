@@ -3,6 +3,7 @@ import { z } from "zod";
 export const createHabitSchema = z.object({
   title: z.string().min(1).max(100),
 
+  type: z.enum(["progress", "completion"]).default("progress"),
   description: z.string().optional(),
 
   icon: z.string().optional(),

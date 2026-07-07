@@ -23,6 +23,7 @@ export const createHabit = async (
       frequency: data.frequency,
       targetValue: data.targetValue,
       unit: data.unit,
+      type:data.type??"progress",
     })
     .returning();
 
