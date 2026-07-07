@@ -8,7 +8,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardPage from "../pages/dashboard/DashboardPage";
 import KarmPage from "../pages/karm/KarmPage";
 import ProtectedRoute from "./ProtectedRoute";
-
+import AnalyticsPage from "../pages/analytics/AnalyticsPage";
 function Placeholder({ title }: { title: string }) {
   return <h1 className="text-3xl">{title}</h1>;
 }
@@ -33,7 +33,7 @@ export default function AppRoutes() {
 
           <Route
             path="/analytics"
-            element={<Placeholder title="Analytics" />}
+            element={<AnalyticsPage />}
           />
 
           <Route

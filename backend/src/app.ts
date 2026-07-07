@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import habitRoutes from "./modules/habits/habit.routes.js";
 import logRoutes from "./modules/logs/log.routes.js";
 import dashboardRoutes from "./modules/dashboard/dashboard.routes.js";
+import analyticsRoutes from "./modules/analytics/analytics.routes.js";
 
 const app = express();
 
@@ -24,5 +25,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/habits", habitRoutes);
 app.use("/api/logs", logRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use(
+  "/api/analytics",
+  analyticsRoutes
+);
 
 export default app;
