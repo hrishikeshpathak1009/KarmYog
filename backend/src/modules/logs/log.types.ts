@@ -3,5 +3,9 @@ export interface CreateLogInput {
   note?: string;
 }
 
-export interface UpdateLogInput
-  extends Partial<CreateLogInput> {}
+export interface UpdateLogInput {
+  completedValue: number;
+  completed?: boolean;
+  skipped?: boolean;
+  note?: string;
+}

@@ -1,4 +1,5 @@
 import {
+  boolean,
   date,
   integer,
   pgTable,
@@ -25,6 +26,14 @@ export const habitLogs = pgTable(
 
     completedValue: integer("completed_value")
       .default(0)
+      .notNull(),
+
+    completed: boolean("completed")
+      .default(false)
+      .notNull(),
+
+    skipped: boolean("skipped")
+      .default(false)
       .notNull(),
 
     note: text("note"),

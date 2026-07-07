@@ -44,3 +44,33 @@ export const deleteHabit = async (id: string) => {
 
   return response.data;
 };
+
+export const incrementHabit = async (
+  habitId: string
+) => {
+  const response = await api.post(
+    `/logs/${habitId}/increment`
+  );
+
+  return response.data.log;
+};
+
+export const decrementHabit = async (
+  habitId: string
+) => {
+  const response = await api.post(
+    `/logs/${habitId}/decrement`
+  );
+
+  return response.data.log;
+};
+
+export const completeHabit = async (
+  habitId: string
+) => {
+  const response = await api.post(
+    `/logs/${habitId}/complete`
+  );
+
+  return response.data.log;
+};

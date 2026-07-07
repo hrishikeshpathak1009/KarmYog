@@ -11,7 +11,7 @@ export const createHabitSchema = z.object({
   color: z.string().optional(),
 
   frequency: z
-    .enum(["daily", "weekly", "monthly"])
+    .enum(["daily", "weekly", "monthly","none"])
     .default("daily"),
 
   targetValue: z.number().int().positive().default(1),

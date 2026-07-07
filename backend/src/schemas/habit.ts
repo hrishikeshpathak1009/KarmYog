@@ -10,6 +10,10 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { users } from "./user.js";
+export const karmKindEnum = pgEnum("karm_kind", [
+  "habit",
+  "task",
+]);
 export const habitTypeEnum = pgEnum("habit_type", [
   "progress",
   "completion",
@@ -29,6 +33,9 @@ export const habits = pgTable("habits", {
   .default("progress")
   .notNull(),
   description: text("description"),
+  kind: karmKindEnum("kind")
+  .default("habit")
+  .notNull(),
 
   icon: varchar("icon", { length: 50 }),
 
@@ -49,7 +56,7 @@ export const habits = pgTable("habits", {
   archived: boolean("archived")
     .default(false)
     .notNull(),
-
+dueDate: timestamp("due_date"),
   createdAt: timestamp("created_at")
     .defaultNow()
     .notNull(),

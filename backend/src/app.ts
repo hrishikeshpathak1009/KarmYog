@@ -22,7 +22,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/habits", habitRoutes);
-app.use("/api/habits", logRoutes);
+app.use("/api/logs", logRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 export default app;

@@ -6,16 +6,27 @@ import {
 } from "@tanstack/react-query";
 
 import AddKarmModal from "../../components/karm/AddKarmModal";
+ import { updateHabit } from "../../services/karm.service";
 
 import {
   getHabits,
   createHabit,
 } from "../../services/karm.service";
 import { deleteHabit } from "../../services/karm.service";
+import {
+  incrementHabit,
+  decrementHabit,
+  completeHabit,
+} from "../../services/karm.service";
+
+
+
 
 export default function KarmPage() {
   const queryClient = useQueryClient();
 
+  const [editingKarm, setEditingKarm] =
+  useState<any>(null);
   const [showModal, setShowModal] = useState(false);
 
   const {
@@ -27,6 +38,29 @@ export default function KarmPage() {
     queryFn: getHabits,
   });
 
+ 
+const updateMutation = useMutation({
+  mutationFn: ({
+    id,
+    data,
+  }: {
+    id: string;
+    data: any;
+  }) => updateHabit(id, data),
+
+  onSuccess: () => {
+    queryClient.invalidateQueries({
+      queryKey: ["habits"],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["dashboard"],
+    });
+
+    setEditingKarm(null);
+    setShowModal(false);
+  },
+});
   const createKarmMutation = useMutation({
     mutationFn: createHabit,
 
@@ -65,6 +99,50 @@ export default function KarmPage() {
     alert("Failed to delete Karm");
   },
 });
+
+const incrementMutation = useMutation({
+  mutationFn: incrementHabit,
+
+  onSuccess: () => {
+    queryClient.invalidateQueries({
+      queryKey: ["dashboard"],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["habits"],
+    });
+  },
+});
+
+const decrementMutation = useMutation({
+  mutationFn: decrementHabit,
+
+  onSuccess: () => {
+    queryClient.invalidateQueries({
+      queryKey: ["dashboard"],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["habits"],
+    });
+  },
+});
+
+const completeMutation = useMutation({
+  mutationFn: completeHabit,
+
+  onSuccess: () => {
+    queryClient.invalidateQueries({
+      queryKey: ["dashboard"],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["habits"],
+    });
+  },
+});
+
+
   if (isLoading) {
     return (
       <div className="flex justify-center py-20">
@@ -161,18 +239,31 @@ export default function KarmPage() {
 
                   <div className="mb-2 flex justify-between">
                     <span>
-                      0 / {karm.targetValue}{" "}
+                      {karm.today.completedValue} / {karm.targetValue}
+                      {" "}
                       {karm.unit}
                     </span>
 
-                    <span>0%</span>
+                    <span>{Math.round(
+  (karm.today.completedValue /
+    karm.targetValue) *
+    100
+)}
+%</span>
                   </div>
 
                   <div className="h-3 w-full rounded-full bg-gray-200">
                     <div
                       className="h-3 rounded-full bg-blue-600 transition-all"
                       style={{
-                        width: "0%",
+                        width: `${
+  Math.min(
+    (karm.today.completedValue /
+      karm.targetValue) *
+      100,
+    100
+  )
+}%`,
                       }}
                     />
                   </div>
@@ -180,17 +271,27 @@ export default function KarmPage() {
 
                 <div className="mt-6 flex gap-3">
 
-                  <button className="rounded-lg bg-gray-200 px-4 py-2">
+                  <button className="rounded-lg bg-gray-200 px-4 py-2" onClick={() =>
+    decrementMutation.mutate(karm.id)
+  }>
                     -
                   </button>
 
-                  <button className="rounded-lg bg-blue-600 px-4 py-2 text-white">
+                  <button  onClick={() =>
+    incrementMutation.mutate(karm.id)
+  }className="rounded-lg bg-blue-600 px-4 py-2 text-white">
                     +
                   </button>
 
-                  <button className="rounded-lg border px-4 py-2">
-                    Edit
-                  </button>
+                 <button
+  onClick={() => {
+    setEditingKarm(karm);
+    setShowModal(true);
+  }}
+  className="rounded-lg border px-4 py-2"
+>
+  Edit
+</button>
 
                   <button
   onClick={() => {
@@ -208,15 +309,33 @@ export default function KarmPage() {
             ) : (
               <div className="mt-6 flex items-center justify-between">
 
-                <button className="rounded-lg bg-green-600 px-5 py-2 text-white hover:bg-green-700">
-                  ✓ Complete
-                </button>
+                <button
+  disabled={karm.today.completed}
+  onClick={() =>
+    completeMutation.mutate(karm.id)
+  }
+  className={`rounded-lg px-5 py-2 text-white ${
+    karm.today.completed
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-green-600 hover:bg-green-700"
+  }`}
+>
+  {karm.today.completed
+    ? "✓ Completed Today"
+    : "✓ Completed"}
+</button>
 
                 <div className="flex gap-3">
 
-                  <button className="rounded-lg border px-4 py-2">
-                    Edit
-                  </button>
+                  <button
+  onClick={() => {
+    setEditingKarm(karm);
+    setShowModal(true);
+  }}
+  className="rounded-lg border px-4 py-2"
+>
+  Edit
+</button>
 
                   <button
   onClick={() => {
@@ -237,13 +356,25 @@ export default function KarmPage() {
       </div>
 
       {showModal && (
-        <AddKarmModal
-          onClose={() => setShowModal(false)}
-          onSubmit={(data) =>
-            createKarmMutation.mutate(data)
-          }
-        />
-      )}
+  <AddKarmModal
+    mode={editingKarm ? "edit" : "create"}
+    initialData={editingKarm ?? undefined}
+    onClose={() => {
+      setShowModal(false);
+      setEditingKarm(null);
+    }}
+    onSubmit={(data) => {
+      if (editingKarm) {
+        updateMutation.mutate({
+          id: editingKarm.id,
+          data,
+        });
+      } else {
+        createKarmMutation.mutate(data);
+      }
+    }}
+  />
+)}
     </div>
   );
   

@@ -10,7 +10,7 @@ export default function Sidebar() {
       <nav className="flex flex-col">
 
         <NavLink
-          to="/"
+          to="/dashboard"
           className="px-6 py-3 hover:bg-gray-100"
         >
           Dashboard

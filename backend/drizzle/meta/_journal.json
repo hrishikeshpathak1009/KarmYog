@@ -29,6 +29,20 @@
       "when": 1783356786941,
       "tag": "0003_mighty_stark_industries",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1783406441029,
+      "tag": "0004_free_northstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1783445583082,
+      "tag": "0005_demonic_human_robot",
+      "breakpoints": true
     }
   ]
 }
