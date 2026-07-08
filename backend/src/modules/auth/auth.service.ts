@@ -56,7 +56,6 @@ export const login = async (data: LoginUserInput) => {
     .from(users)
     .where(eq(users.email, data.email));
 
-    console.log("incoming",data);
   if (!user) {
     throw new Error("Invalid email or password");
   }

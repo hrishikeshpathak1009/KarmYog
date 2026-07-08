@@ -13,18 +13,19 @@ export const registerController = async (
     const { user, token } = await register(data);
 
     res
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      })
-      .status(201)
-      .json({
-        success: true,
-        message: "Registration successful",
-        user,
-      });
+  .cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: "/",
+  })
+  .status(200)
+  .json({
+    success: true,
+    message: "Login successful",
+    user,
+  });
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -43,20 +44,20 @@ export const loginController = async (
     const data = loginSchema.parse(req.body);
 
     const { user, token } = await login(data);
-
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      })
-      .status(200)
-      .json({
-        success: true,
-        message: "Login successful",
-        user,
-      });
+res
+  .cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: "/",
+  })
+  .status(200)
+  .json({
+    success: true,
+    message: "Login successful",
+    user,
+  });
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -80,10 +81,10 @@ export const logoutController = async (
   req: Request,
   res: Response
 ) => {
-  res.clearCookie("token");
-
-  res.status(200).json({
-    success: true,
-    message: "Logged out successfully",
-  });
+  res.clearCookie("token", {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  path: "/",
+});
 };
