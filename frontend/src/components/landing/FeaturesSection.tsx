@@ -1,5 +1,5 @@
 import dashboardImg from "../../assets/dashboard.png";
-import karmImg from "../../assets/Karm.png";
+import karmImg from "../../assets/karm.png";
 import analyticsImg from "../../assets/analytics.png";
 
 export default function FeaturesSection() {
