@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-white border-r">
+    <aside className="w-50 bg-white border-r">
       <div className="p-6 text-2xl font-bold">
         KarmYog
       </div>
@@ -20,7 +20,7 @@ export default function Sidebar() {
           to="/habits"
           className="px-6 py-3 hover:bg-gray-100"
         >
-          Habits
+          My Karm
         </NavLink>
 
         <NavLink

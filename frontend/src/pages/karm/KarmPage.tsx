@@ -176,7 +176,8 @@ export default function KarmPage() {
   if (isLoading) {
     return (
       <div className="flex justify-center py-20">
-        Loading...
+        Loading  your Karms...
+        
       </div>
     );
   }
@@ -217,7 +218,7 @@ export default function KarmPage() {
           </h1>
 
           <p className="text-gray-500">
-            Every action shapes your future.
+            कर्म प्रधान विश्व रचि राखा, जो जस करहि सो तस फल चाखा
           </p>
 
         </div>
