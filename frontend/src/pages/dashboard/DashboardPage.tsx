@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 import SummaryCard from "../../components/dashboard/SummaryCard";
-import HabitCard from "../../components/dashboard/HabitCard";
+//import HabitCard from "../../components/dashboard/HabitCard";
 
 import { getDashboard } from "../../services/dashboard.service";
 
