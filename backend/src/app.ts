@@ -21,6 +21,12 @@ app.use(express.json());
 
 
 // Routes
+app.get("/", (req, res) => {
+  res.json({
+    status: "OK",
+    service: "KarmYog Backend"
+  });
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/habits", habitRoutes);
 app.use("/api/logs", logRoutes);
