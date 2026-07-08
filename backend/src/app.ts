@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://karmyog-hp.vercel.app/",
+      "https://karmyog-hp.vercel.app",
     ],
     credentials: true,
   })
