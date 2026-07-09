@@ -1,4 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { LogOut } from "lucide-react";
+import { logout } from "../../services/auth.service";
+
+
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -9,6 +15,15 @@ export default function Sidebar({
   sidebarOpen,
   setSidebarOpen,
 }: SidebarProps) {
+  const navigate = useNavigate();
+
+const logoutMutation = useMutation({
+  mutationFn: logout,
+
+  onSuccess: () => {
+    navigate("/");
+  },
+});
   return (
     <aside
       className={`
@@ -70,6 +85,13 @@ export default function Sidebar({
         </NavLink>
 
       </nav>
+      <button
+  onClick={() => logoutMutation.mutate()}
+  className="mt-auto flex w-full items-center gap-3 border-t border-gray-200 px-6 py-4 text-gray-600 transition hover:bg-red-50 hover:text-red-600"
+>
+  <LogOut size={18} />
+  Logout
+</button>
     </aside>
   );
 }
