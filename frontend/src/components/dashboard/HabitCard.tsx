@@ -18,11 +18,11 @@ export default function HabitCard({
   );
 
   return (
-    <div className="rounded-xl bg-white p-5 shadow">
+    <div className="rounded-xl bg-white p-2 md:p-6 shadow">
 
       <div className="mb-4 flex items-center justify-between">
 
-        <h2 className="font-semibold">
+        <h2 className="text-xl md:text-2xl font-semibold">
           {title}
         </h2>
 

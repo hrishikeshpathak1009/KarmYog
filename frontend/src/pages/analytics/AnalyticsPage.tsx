@@ -22,7 +22,7 @@ function SummaryCard({
   value: string | number;
 }) {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow">
+    <div className="rounded-2xl bg-white p-3 shadow">
       <h3 className="text-gray-500">{title}</h3>
 
       <p className="mt-3 text-3xl font-bold">
@@ -66,7 +66,7 @@ export default function AnalyticsPage() {
           Analytics
         </h1>
 
-        <p className="text-gray-500">
+        <p className="mt-2 text-gray-500">
           Understand your consistency and
           progress.
         </p>
@@ -74,7 +74,7 @@ export default function AnalyticsPage() {
 
       {/* Summary Cards */}
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 
         <SummaryCard
           title="Today's Progress"
@@ -100,7 +100,7 @@ export default function AnalyticsPage() {
 
       {/* Weekly Chart */}
 
-      <div className="rounded-2xl bg-white p-6 shadow">
+      <div className="rounded-2xl bg-white p-3 md:p-6 shadow">
 
         <h2 className="mb-6 text-2xl font-semibold">
           Weekly Progress
@@ -108,7 +108,7 @@ export default function AnalyticsPage() {
 
         <ResponsiveContainer
           width="100%"
-          height={300}
+          height={200} 
         >
           <LineChart
             data={data.weeklyTrend}
@@ -134,7 +134,7 @@ export default function AnalyticsPage() {
 
       {/* Monthly Chart */}
 
-      <div className="rounded-2xl bg-white p-6 shadow">
+      <div className="rounded-2xl bg-white p-3 md:p-6 shadow">
 
         <h2 className="mb-6 text-2xl font-semibold">
           Monthly Progress
@@ -142,7 +142,7 @@ export default function AnalyticsPage() {
 
         <ResponsiveContainer
           width="100%"
-          height={300}
+          height={200}
         >
           <BarChart
             data={data.monthlyTrend}
@@ -169,7 +169,7 @@ export default function AnalyticsPage() {
 
       {/* Heatmap */}
 
-      <div className="rounded-2xl bg-white p-6 shadow">
+      <div className="rounded-2xl bg-white p-3 md:p-6 shadow">
 
         <h2 className="mb-6 text-2xl font-semibold">
           Contribution Heatmap
@@ -206,7 +206,7 @@ export default function AnalyticsPage() {
 
       {/* Statistics */}
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-4 md:gap-6">
 
         <SummaryCard
           title="Total Karm"
