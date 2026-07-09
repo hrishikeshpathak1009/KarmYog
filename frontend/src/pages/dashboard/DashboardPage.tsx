@@ -114,13 +114,13 @@ console.log(data);
   })) ?? [];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-3 md:space-y-8">
 
       {/* Hero Quote */}
 
-      <div className="rounded-2x2 bg-gradient-to-r from-blue-50 to-amber-50 p-6 shadow">
+      <div className="rounded-2x2 bg-gradient-to-r from-blue-50 to-amber-50 p-1 md:p-5 shadow">
 
-        <p className="text-center text-2xl leading-relaxed font-semibold text-orange-900">
+        <p className="text-center text-xl md:text-2xl leading-relaxed font-semibold text-orange-900">
 
           हनूमान तेहि परसा कर पुनि कीन्ह प्रनाम।
           <br />
@@ -128,7 +128,7 @@ console.log(data);
 
         </p>
 
-        <p className="mt-4 text-right text-gray-60">
+        <p className="mt-2 md:mt-4 text-right text-sm text-gray-60">
 
           — गोस्वामी तुलसीदास, श्रीरामचरितमानस (सुंदरकांड, दोहा 1)
 
@@ -148,7 +148,7 @@ console.log(data);
               Today's Progress
             </h2>
 
-            <p className="mt-2 text-gray-500">
+            <p className="mt-1 md:mt-2 text-gray-500">
 
               {data.summary.completedToday} of{" "}
               {data.summary.totalKarm} Karm completed
@@ -165,10 +165,10 @@ console.log(data);
 
         </div>
 
-        <div className="mt-8 h-5 w-full rounded-full bg-gray-200">
+        <div className="mt-4 md:-8 h-2 md:h-5 w-full rounded-full bg-gray-200">
 
           <div
-            className="h-5 rounded-full bg-blue-600 transition-all duration-500"
+            className="h-2 md:h-5 rounded-full bg-blue-600 transition-all duration-500"
             style={{
               width: `${data.summary.todayProgress}%`,
             }}
@@ -180,7 +180,7 @@ console.log(data);
 
       {/* Summary */}
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-2 xl:grid-cols-4">
 
         <SummaryCard
           title="Total Karm"
@@ -248,7 +248,7 @@ console.log(data);
 
       <div>
 
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-3 md:mb:8 flex items-center justify-between">
 
           <h2 className="text-3xl font-bold">
 
@@ -265,7 +265,7 @@ console.log(data);
 
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-2 md:y-5">
 
           {data.todayHabits.map((karm: any) => {
 
@@ -284,7 +284,7 @@ console.log(data);
 
             return (<div
   key={karm.id}
-  className="rounded-3xl bg-white p-6 shadow transition hover:shadow-lg"
+  className="rounded-3xl bg-white p-3 md:p-5 shadow transition hover:shadow-lg"
 >
   <div className="flex items-center justify-between">
 
@@ -295,7 +295,7 @@ console.log(data);
       </h3>
 
       {karm.completed ? (
-        <p className="mt-2 text-green-600">
+        <p className="mt-2 text-sm text-green-600">
           ✓ Completed Today
         </p>
       ) : (
@@ -308,7 +308,7 @@ console.log(data);
     </div>
 
     {karm.completed && (
-      <div className="rounded-full bg-green-100 px-4 py-2 font-semibold text-green-700">
+      <div className="rounded-full bg-green-100 px-4 py-2 font-semibold text-sm text-green-700">
         Completed
       </div>
     )}
@@ -317,12 +317,12 @@ console.log(data);
 
   {!karm.completed && (
     <>
-      <div className="mt-5">
+      <div className="mt-1 md:mt-5">
 
-        <div className="h-3 w-full rounded-full bg-gray-200">
+        <div className="h-2 md:h-3 w-full rounded-full bg-gray-200">
 
           <div
-            className="h-3 rounded-full bg-blue-600 transition-all"
+            className="h-2 md:h-3 rounded-full bg-blue-600 transition-all"
             style={{
               width: `${progress}%`,
             }}
@@ -332,7 +332,7 @@ console.log(data);
 
       </div>
 
-      <div className="mt-6 flex gap-3">
+      <div className="mt-6 flex gap-4">
 
         <button
           onClick={() =>
@@ -382,9 +382,9 @@ console.log(data);
 
 {/* Top Streaks */}
 
-<div className="rounded-3xl bg-white p-8 shadow">
+<div className="rounded-3xl bg-white p-4 md:p-8 shadow">
 
-<h2 className="mb-6 text-2xl font-bold">
+<h2 className="mb-2 md:mb-6 text-2xl font-bold">
 
 🔥 Top Streaks
 
@@ -400,7 +400,7 @@ Complete a habit to begin building streaks.
 
 ) : (
 
-<div className="space-y-4">
+<div className="space-y-2">
 
 {data.topStreaks
 .slice(0, 3)
@@ -408,7 +408,7 @@ Complete a habit to begin building streaks.
 
 <div
 key={streak.id}
-className="flex items-center justify-between rounded-xl border p-4"
+className="flex items-center justify-between rounded-xl border p-2 md:p-4"
 >
 
 <div>

@@ -207,18 +207,18 @@ export default function KarmPage() {
   // ---------------------------------
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-1">
 
       <div className="flex items-center justify-between">
 
         <div>
-
-          <h1 className="text-4xl font-bold">
+<h1 className="text-3xl md:text-4xl font-bold">
+          
             My Karm
           </h1>
 
-          <p className="text-gray-500">
-            कर्म प्रधान विश्व रचि राखा, जो जस करहि सो तस फल चाखा
+          <p className="text-gray-500 py-3">
+            कर्म प्रधान विश्व रचि राखा <br/>जो जस करहि सो तस फल चाखा 
           </p>
 
         </div>
@@ -228,7 +228,7 @@ export default function KarmPage() {
             setEditingKarm(null);
             setShowModal(true);
           }}
-          className="rounded-xl bg-blue-600 px-5 py-3 text-white hover:bg-blue-700"
+          className="rounded-xl  bg-blue-600 px-4 py-4 text-sm text-white hover:bg-blue-700 md:px-5 md:py-3 md:text-base"
         >
           + Add Karm
         </button>
@@ -292,20 +292,20 @@ export default function KarmPage() {
 
           return (<div
   key={karm.id}
-  className="rounded-2xl bg-white p-6 shadow transition hover:shadow-lg"
+  className="rounded-2xl bg-white p-4 shadow transition hover:shadow-lg"
 >
   <div className="flex items-start justify-between">
 
     <div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 md:gap-3">
 
-        <h2 className="text-2xl font-semibold">
+        <h2 className="text-xl font-semibold">
           {karm.title}
         </h2>
 
         <span
-          className={`rounded-full px-3 py-1 text-xs font-medium ${
+          className={`rounded-full  px-2 py-0.5 text-[112x] md:px-3 md:py-1 md:text-xs text-xs font-medium ${
             karm.kind === "habit"
               ? "bg-purple-100 text-purple-700"
               : "bg-orange-100 text-orange-700"
@@ -319,7 +319,7 @@ export default function KarmPage() {
       </div>
 
       {streak && (
-        <div className="mt-2 flex gap-5 text-sm text-gray-500">
+        <div className="mt-1 flex gap-3 text-xs md:text-sm text-gray-500">
 
           <span>
             🔥 {streak.currentStreak} day
@@ -336,7 +336,7 @@ export default function KarmPage() {
       )}
 
       {karm.description && (
-        <p className="mt-2 text-gray-500">
+        <p className="mt-1 text-sm text-gray-500">
           {karm.description}
         </p>
       )}
@@ -344,7 +344,7 @@ export default function KarmPage() {
     </div>
 
     <span
-      className={`rounded-full px-3 py-1 text-sm font-medium ${
+      className={`rounded-full px-2 py-.5 text-[10px] md:px-3 md:py-1 md:text-xs font-medium ${
         karm.type === "completion"
           ? "bg-green-100 text-green-700"
           : "bg-blue-100 text-blue-700"
@@ -359,7 +359,7 @@ export default function KarmPage() {
 
   {karm.type === "progress" ? (
     <>
-      <div className="mt-6">
+      <div className="mt-3 md:mt-6">
 
         <div className="mb-2 flex justify-between">
 
@@ -375,10 +375,10 @@ export default function KarmPage() {
 
         </div>
 
-        <div className="h-3 w-full rounded-full bg-gray-200">
+        <div className="h-2 md:h-3 w-full rounded-full bg-gray-200">
 
           <div
-            className="h-3 rounded-full bg-blue-600 transition-all duration-300"
+            className="h-2 md:h-3 rounded-full bg-blue-600 transition-all duration-300"
             style={{
               width: `${progress}%`,
             }}
@@ -388,7 +388,7 @@ export default function KarmPage() {
 
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-3 md:mt-6 flex flex-wrap gap-3">
 
         <button
           onClick={() =>
