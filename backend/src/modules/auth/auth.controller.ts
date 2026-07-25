@@ -39,7 +39,7 @@ export const loginController = async (
   req: Request,
   res: Response
 ) => {
-  console.log(req.body);
+  
   try {
     const data = loginSchema.parse(req.body);
 
@@ -48,9 +48,14 @@ res
   .cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    sameSite:
+      process.env.NODE_ENV === "production" ? "none" : "lax",
     path: "/",
+
+    // Persist only if "Remember Me" is checked
+    ...(data.rememberMe && {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    }),
   })
   .status(200)
   .json({

@@ -9,6 +9,7 @@ export default function LoginPage() {
 
   const [showPassword, setShowPassword] = useState(false);
   const { refreshUser } = useAuth();
+  const [rememberMe, setRememberMe] = useState(false);
 
   const [email, setEmail] = useState("");
 
@@ -82,7 +83,7 @@ export default function LoginPage() {
   <button
     type="button"
     onClick={() => setShowPassword(!showPassword)}
-    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+    className="absolute right-3 top-1/3 -translate-y-1/2 text-gray-500 hover:text-gray-700"
   >
     {showPassword ? (
       <EyeOff size={20} />
@@ -90,6 +91,19 @@ export default function LoginPage() {
       <Eye size={20} />
     )}
   </button>
+  <div className="flex items-center gap-2 mt-3">
+  <input
+    id="remember"
+    type="checkbox"
+    checked={rememberMe}
+    onChange={(e) => setRememberMe(e.target.checked)}
+    className="h-4 w-4"
+  />
+
+  <label htmlFor="remember" className="text-sm">
+    Remember me
+  </label>
+</div>
 </div>
 
         <button

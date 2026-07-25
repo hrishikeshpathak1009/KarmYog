@@ -7,6 +7,7 @@ export interface RegisterUserInput {
 export interface LoginUserInput {
   email: string;
   password: string;
+  rememberMe?: boolean;
 }
 
 export interface JwtPayload {

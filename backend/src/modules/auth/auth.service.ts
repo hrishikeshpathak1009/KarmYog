@@ -73,7 +73,7 @@ export const login = async (data: LoginUserInput) => {
   // Generate JWT
   const token = generateToken({
     userId: user.id,
-  });
+  },data.rememberMe?"30d":"1d");
 
   return {
     user: {
