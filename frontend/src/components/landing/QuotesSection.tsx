@@ -58,7 +58,7 @@ export default function QuotesSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % quotes.length);
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
